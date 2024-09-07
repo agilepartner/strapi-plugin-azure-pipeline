@@ -1,5 +1,5 @@
-import myService from './my-service';
+import azurePipeline from './azure-pipeline'
 
 export default {
-  myService,
-};
+	azurePipeline,
+}

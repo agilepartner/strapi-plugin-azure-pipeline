@@ -1,5 +1,5 @@
-import myController from './my-controller';
+import azurePipeline from './azure-pipeline'
 
 export default {
-  myController,
-};
+	azurePipeline,
+}
