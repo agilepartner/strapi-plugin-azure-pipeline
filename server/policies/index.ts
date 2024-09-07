@@ -1,1 +1,5 @@
-export default {};
+import validatePluginConfig from './validatePluginConfig'
+
+export default {
+	validatePluginConfig,
+}
