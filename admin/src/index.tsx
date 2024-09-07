@@ -3,6 +3,7 @@ import { prefixPluginTranslations } from '@strapi/helper-plugin';
 import pluginPkg from '../../package.json';
 import Initializer from './components/Initializer';
 import PluginIcon from './components/PluginIcon';
+import pluginPermissions from './permissions';
 import pluginId from './pluginId';
 
 const name = pluginPkg.strapi.name;
@@ -25,8 +26,7 @@ export default {
 
         return component;
       },
-      //permissions: pluginPermissions.trigger,
-      permissions: []
+      permissions: pluginPermissions.trigger,
     });
 
     // Settings page
@@ -53,8 +53,7 @@ export default {
             );
             return component;
           },
-          //permissions: pluginPermissions.settings,
-          permissions: []
+          permissions: pluginPermissions.settings,
         },
       ]
     );
