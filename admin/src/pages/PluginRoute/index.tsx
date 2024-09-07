@@ -1,6 +1,19 @@
+import { NotFound } from '@strapi/helper-plugin';
+import { Route, Switch } from 'react-router-dom';
+import pluginId from '../../../../utils/pluginId';
+import PluginPage from '../PluginPage';
+import SettingPage from '../SettingPage';
 
-export default function PluginRoute() {
+const PluginRoute = () => {
   return (
-    <div>PluginRoute</div>
-  )
-}
+    <div>
+      <Switch>
+        <Route path={`/settings/${pluginId}`} component={SettingPage} exact />
+        <Route path={`/plugins/${pluginId}`} component={PluginPage} exact />
+        <Route component={NotFound} />
+      </Switch>
+    </div>
+  );
+};
+
+export default PluginRoute;
