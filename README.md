@@ -3,3 +3,23 @@
 A strapi plugin to rebuild and deploy your SSG website via Azure Pipeline.
 
 This plugin is inspired by [strapi-plugin-update-static-content](https://github.com/everythinginjs/strapi-plugin-update-static-content)
+
+## Setup
+
+```sh
+npm install strapi-plugin-azure-pipeline
+```
+
+```typescript
+// config/plugins.ts
+
+export default () => ({
+  ...
+
+  "azure-pipeline": {
+    enabled: true,
+  },
+
+  ...
+});
+```
