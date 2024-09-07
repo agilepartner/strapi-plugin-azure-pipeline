@@ -27,9 +27,10 @@ export default function useFetchData({ url, method }: FetchDataProps): FetchData
         const response = await axios(url, { method });
         setFetchedData(response.data);
       } catch (err: any) {
-        console.log(err);
         setErrors({
-          message: err.response.data.error.message,
+          code: err.code,
+          status: err.status,
+          message: `${err.message}: ${err.response.data.error.message}`,
           type: err.response.data.error.details.type,
         });
       } finally {

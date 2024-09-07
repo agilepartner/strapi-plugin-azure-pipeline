@@ -40,5 +40,13 @@ export default function Guard({ errors, children }: GuardProps) {
     );
   }
 
+  if (errors)
+    return (
+      <EmptyStateLayout
+        content={errors.message}
+        icon={<EmptyPermissions width={ICON_SIZE} height={ICON_SIZE} />}
+      />
+    )
+
   return <>{children}</>;
 }
