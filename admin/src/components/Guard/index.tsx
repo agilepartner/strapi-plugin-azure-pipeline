@@ -3,14 +3,12 @@ import { ArrowRight, EmptyPermissions } from '@strapi/icons';
 import { ReactNode } from 'react';
 import pluginId from '../../../../utils/pluginId';
 import useFormattedLabel from '../../hooks/useFormattedLabel';
+import { ErrorDetails } from '../../types/errors';
 
 const ICON_SIZE = 100;
 
 type GuardProps = {
-  errors: {
-    message: string;
-    type: string;
-  };
+  errors: ErrorDetails | null
   children: ReactNode;
 };
 
@@ -26,12 +24,12 @@ export default function Guard({ errors, children }: GuardProps) {
     );
   }
 
-  if (errors.message === 'MISSING_CONFIG') {
+  if (errors?.message === 'MISSING_CONFIG') {
     const MISSING_CONFIG = useFormattedLabel('plugin.missingConfig.message');
     const MISSING_CONFIG_BTN = useFormattedLabel('plugin.missingConfig.button');
     return (
       <EmptyStateLayout
-        content={`${MISSING_CONFIG}${errors.type}`}
+        content={`${MISSING_CONFIG}${errors?.type}`}
         icon={<EmptyPermissions width={ICON_SIZE} height={ICON_SIZE} />}
         action={
           <LinkButton to={`/settings/${pluginId}`} variant="default" endIcon={<ArrowRight />}>

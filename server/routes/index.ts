@@ -7,13 +7,13 @@ export default [
     handler: 'config.getPluginConfig',
     config: {
       policies: [
-        'admin::isAuthenticatedAdmin',
-        {
-          name: 'admin::hasPermissions',
-          config: {
-            actions: [`plugin::${pluginId}.settings`],
-          },
-        },
+        // 'admin::isAuthenticatedAdmin',
+        // {
+        //   name: 'admin::hasPermissions',
+        //   config: {
+        //     actions: [`plugin::${pluginId}.settings`],
+        //   },
+        // },
       ],
       auth: false,
     },
