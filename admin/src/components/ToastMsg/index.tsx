@@ -9,12 +9,12 @@ const stickyStyle: React.CSSProperties = {
   zIndex: 10,
 };
 
-type ToastMessageProps = {
+export type ToastMessageProps = {
   variant: string;
   title: string;
   message: string;
   action?: React.ReactNode;
-  closeToastHandler: () => void;
+  closeToastHandler?: () => void;
 };
 
 export default function ToastMessage({

@@ -5,8 +5,16 @@ import { useState } from 'react';
 import pluginId from '../../../../utils/pluginId';
 import axios from '../../utils/axiosInstance';
 import Label from '../Label';
+import { ToastMessageProps } from '../ToastMsg';
 
-type CustomRowProps = {
+interface ToastHandler {
+  toastMsg: ToastMessageProps | undefined;
+  setToastMsg: React.Dispatch<React.SetStateAction<ToastMessageProps | undefined>>;
+  toastToggle: boolean;
+  setToastToggle: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export interface CustomRowProps extends ToastHandler {
   id: number;
   conclusion?: string;
   name: string;
@@ -27,6 +35,7 @@ export default function CustomRow({
   updated_at,
   created_at,
 }: CustomRowProps) {
+
   const isThereAConclusion = Boolean(conclusion);
   const [disabledLogsButton, setDisabledLogsButton] = useState(isThereAConclusion ? false : true);
   const msDiffResult = differenceInMilliseconds(new Date(updated_at), new Date(run_started_at));
@@ -39,7 +48,7 @@ export default function CustomRow({
     try {
       let logsUrl = await axios({
         method: 'get',
-        url: `/${pluginId}/github-actions-jobs-log`,
+        url: `/${pluginId}/logs`,
         params: {
           jobId: id,
         },
@@ -53,35 +62,33 @@ export default function CustomRow({
   }
 
   return (
-    <>
-      <Tr aria-rowindex={id}>
-        <Td>{run_number}</Td>
-        <Td>{name}</Td>
-        <Td>{conclusion ? Label(conclusion) : '-'}</Td>
-        <Td>{creationDate}</Td>
-        {!isThereAConclusion ? (
-          <Td>in progress</Td>
-        ) : (
-          <Td>{`${mins ? mins + 'm' : ''} ${secs}s`}</Td>
-        )}
-        <Td>
-          <IconButtonGroup>
-            <Tooltip description="logs">
-              <IconButton
-                disabled={disabledLogsButton}
-                aria-label="logs"
-                onClick={() => logsHandler(id)}
-                icon={<Eye />}
-              />
-            </Tooltip>
-            <Tooltip description="view more">
-              <a href={html_url} target="_blank" rel="noreferrer">
-                <IconButton aria-label="view more" icon={<ExternalLink />} />
-              </a>
-            </Tooltip>
-          </IconButtonGroup>
-        </Td>
-      </Tr>
-    </>
+    <Tr aria-rowindex={id}>
+      <Td>{run_number}</Td>
+      <Td>{name}</Td>
+      <Td>{conclusion ? Label(conclusion) : '-'}</Td>
+      <Td>{creationDate}</Td>
+      {!isThereAConclusion ? (
+        <Td>in progress</Td>
+      ) : (
+        <Td>{`${mins ? mins + 'm' : ''} ${Math.trunc(secs)}s`}</Td>
+      )}
+      <Td>
+        <IconButtonGroup>
+          <Tooltip description="logs">
+            <IconButton
+              disabled={disabledLogsButton}
+              aria-label="logs"
+              onClick={() => logsHandler(id)}
+              icon={<Eye />}
+            />
+          </Tooltip>
+          <Tooltip description="view more">
+            <a href={html_url} target="_blank" rel="noreferrer">
+              <IconButton aria-label="view more" icon={<ExternalLink />} />
+            </a>
+          </Tooltip>
+        </IconButtonGroup>
+      </Td>
+    </Tr>
   );
 }

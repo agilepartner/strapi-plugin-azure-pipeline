@@ -7,7 +7,14 @@ This plugin is inspired by [strapi-plugin-update-static-content](https://github.
 ## Setup
 
 ```sh
+# npm
 npm install strapi-plugin-azure-pipeline
+
+# yarn
+yarn strapi-plugin-azure-pipeline
+
+# pnpm
+pnpm install strapi-plugin-azure-pipeline
 ```
 
 ## Configure

@@ -1,8 +1,8 @@
 import { Badge } from '@strapi/design-system';
 
 export default function Label(status: string) {
-  const isSuccess = status === 'success';
-  const isFailure = status === 'failure';
+  const isSuccess = status === 'succeeded';
+  const isFailure = status === 'failed';
 
   const BadgeStyles = {
     textColor: 'neutral100',
